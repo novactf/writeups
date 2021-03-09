@@ -1,6 +1,7 @@
 ---
 tags: crypto
 year: 2021
+authors: crit
 ---
 # Hangman Battle Royale
 
