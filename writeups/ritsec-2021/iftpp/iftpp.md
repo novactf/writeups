@@ -41,7 +41,7 @@ for packet in capture:
     parsed_messages.append(msg)
 ```
 
-The parser is long so, instead of pasting it here, you can see it in (`iftpp.py`)[/iftpp-src/iftpp.py].
+The parser is long so, instead of pasting it here, you can see it in (`iftpp.py`)[iftpp-src/iftpp.py].
 
 ### Decrypting the message
 
