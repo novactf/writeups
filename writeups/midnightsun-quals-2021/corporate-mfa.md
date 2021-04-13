@@ -1,5 +1,5 @@
 ---
-tags: web
+tags: web, php, unserialize, object reference
 year: 2021
 authors: v0n3x
 ---
@@ -124,9 +124,9 @@ We use the following code for that:
 ```
 
 Giving the following serialized data:  
-`O:8:"stdClass":4:{s:8:"username";s:11:"D0loresH4ze";s:8:"password";s:13:"rasmuslerdorf";s:13:"_correctValue";N;s:3:"mfa";R:4;}`
+```O:8:"stdClass":4:{s:8:"username";s:11:"D0loresH4ze";s:8:"password";s:13:"rasmuslerdorf";s:13:"_correctValue";N;s:3:"mfa";R:4;}```
 
-> The N flag is a null value and the R flag is a pointer reference, more info on that at the bottom of the writeup.
+> The N flag is a null value and the R flag is a pointer reference, more info on that at the Resources section.
 
 The pointer reference is to the index of **4** cause of the way PHP unserialization data gets stored. Unserialize keeps a table of all the created variables so it supports references. This table always starts at index **1**. Our data should look like this:
 
@@ -142,9 +142,7 @@ So, `stdClass` works like an associative array for our `user` input, then `_corr
 
 
 ## Flag
-We can now base64 encode our final payload, use it as the value of the `userdata` parameter and send it, thus retrieving the flag.
-
-![screenshot](./assets/flag.png)  
+We can now base64 encode our final payload, use it as the value of the `userdata` parameter and send it, thus retrieving the flag.  
 
 Flag: `midnight{395E160F-4DB8-4D7A-99EF-08E6799741B5}`
 
