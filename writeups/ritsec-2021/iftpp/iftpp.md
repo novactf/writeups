@@ -1,3 +1,8 @@
+---
+tags: forensics
+year: 2021
+authors: crit
+---
 # IFTPP
 
 We were given a `.pcapng` file which I promptly opened with Wireshark.
