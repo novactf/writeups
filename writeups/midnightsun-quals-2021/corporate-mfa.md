@@ -124,7 +124,9 @@ We use the following code for that:
 ```
 
 Giving the following serialized data:  
-```O:8:"stdClass":4:{s:8:"username";s:11:"D0loresH4ze";s:8:"password";s:13:"rasmuslerdorf";s:13:"_correctValue";N;s:3:"mfa";R:4;}```
+```
+O:8:"stdClass":4:{s:8:"username";s:11:"D0loresH4ze";s:8:"password";s:13:"rasmuslerdorf";s:13:"_correctValue";N;s:3:"mfa";R:4;}
+```
 
 > The N flag is a null value and the R flag is a pointer reference, more info on that at the Resources section.
 
